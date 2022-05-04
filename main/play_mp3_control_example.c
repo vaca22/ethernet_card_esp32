@@ -106,14 +106,16 @@ void app_main(void)
 
     const char *file = MOUNT_POINT"/fuck.txt";
 
-    f = fopen(file, "wb");
+    f = fopen(file, "rb");
     char buf[1024]={97};
     for(int k=0;k<1024;k++){
         buf[k]=97;
     }
+    int b=0;
     ESP_LOGI(TAG, "Card mountedxxxxxxxx");
-    for(int k=0;k<100000;k++){
-        fwrite(buf,1024,1,f);
+    for(int k=0;k<100;k++){
+        b=fread(buf,1024,1,f);
+        ESP_LOGE("fuck","%d",b);
     }
     fclose(f);
     ESP_LOGI(TAG, "Card unmountedxxxxxxxxxx");
