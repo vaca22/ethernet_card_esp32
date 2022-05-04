@@ -81,7 +81,7 @@ void app_main(void)
     sdmmc_slot_config_t slot_config = SDMMC_SLOT_CONFIG_DEFAULT();
 
 
-    slot_config.width = 0;
+    slot_config.width = 1;
 
     slot_config.flags |= SDMMC_SLOT_FLAG_INTERNAL_PULLUP;
 
@@ -107,15 +107,21 @@ void app_main(void)
     const char *file = MOUNT_POINT"/fuck.txt";
 
     f = fopen(file, "rb");
+    if (f == NULL) {
+        ESP_LOGE(TAG, "Failed to open file for reading");
+
+    }
+//    fseek(f, 0, SEEK_END);
+//    long gg= ftell(f);
+//    ESP_LOGE(TAG, "Failed to open file for reading %ld" ,gg);
     char buf[1024]={97};
     for(int k=0;k<1024;k++){
         buf[k]=97;
     }
     int b=0;
     ESP_LOGI(TAG, "Card mountedxxxxxxxx");
-    for(int k=0;k<100;k++){
-        b=fread(buf,1024,1,f);
-        ESP_LOGE("fuck","%d",b);
+    for(int k=0;k<100000;k++){
+        fread(buf,1024,1,f);
     }
     fclose(f);
     ESP_LOGI(TAG, "Card unmountedxxxxxxxxxx");
