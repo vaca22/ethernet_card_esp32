@@ -76,12 +76,12 @@ void app_main(void)
 
     ESP_LOGI(TAG, "Using SDMMC peripheral");
     sdmmc_host_t host = SDMMC_HOST_DEFAULT();
-
+    host.max_freq_khz = SDMMC_FREQ_HIGHSPEED;
 
     sdmmc_slot_config_t slot_config = SDMMC_SLOT_CONFIG_DEFAULT();
 
 
-    slot_config.width = 0;
+    slot_config.width = 1;
 
     slot_config.flags |= SDMMC_SLOT_FLAG_INTERNAL_PULLUP;
 
