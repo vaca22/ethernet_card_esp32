@@ -81,7 +81,7 @@ void app_main(void)
     sdmmc_slot_config_t slot_config = SDMMC_SLOT_CONFIG_DEFAULT();
 
 
-    slot_config.width = 1;
+    slot_config.width = 0;
 
     slot_config.flags |= SDMMC_SLOT_FLAG_INTERNAL_PULLUP;
 
