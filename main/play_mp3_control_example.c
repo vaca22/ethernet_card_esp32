@@ -54,7 +54,7 @@ int mp3_music_read_cb(audio_element_handle_t el, char *buf, int len, TickType_t 
     fread(buf,len,1,f);
     return len;
 }
-
+char buf[64*1024]={97};
 void app_main(void)
 {
 
@@ -66,7 +66,7 @@ void app_main(void)
     esp_vfs_fat_sdmmc_mount_config_t mount_config = {
             .format_if_mount_failed = true,
             .max_files = 5,
-            .allocation_unit_size = 16 * 1024
+            .allocation_unit_size = 64 * 1024
     };
     sdmmc_card_t *card;
     const char mount_point[] = MOUNT_POINT;
@@ -107,13 +107,13 @@ void app_main(void)
     const char *file = MOUNT_POINT"/fuck.txt";
 
     f = fopen(file, "wb");
-    char buf[1024]={97};
-    for(int k=0;k<1024;k++){
+
+    for(int k=0;k<64*1024;k++){
         buf[k]=97;
     }
     ESP_LOGI(TAG, "Card mountedxxxxxxxx");
-    for(int k=0;k<100000;k++){
-        fwrite(buf,1024,1,f);
+    for(int k=0;k<1000;k++){
+        fwrite(buf,1024*64,1,f);
     }
     fclose(f);
     ESP_LOGI(TAG, "Card unmountedxxxxxxxxxx");
