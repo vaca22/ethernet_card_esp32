@@ -55,6 +55,7 @@ int mp3_music_read_cb(audio_element_handle_t el, char *buf, int len, TickType_t 
     return len;
 }
 char buf[1024*64]={97};
+char buf2[1024*64]={0};
 void app_main(void)
 {
 
@@ -107,6 +108,7 @@ void app_main(void)
     const char *file = MOUNT_POINT"/fuck.txt";
 
     f = fopen(file, "rb");
+    setvbuf(f,buf2,_IOFBF,64*1024);
     if (f == NULL) {
         ESP_LOGE(TAG, "Failed to open file for reading");
 
